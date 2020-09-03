@@ -1,0 +1,133 @@
+body{
+	font-size: 12px;
+	background-color: #eee;
+}
+.container{
+	width: 1080px;
+	margin-left: auto;
+	margin-right: auto;
+}
+a{
+	color:#333;
+	text-decoration: none;
+}
+a:hover{
+	color:#1890ff;
+}
+.col-1{
+	width:208px; 
+}
+.col-gap{
+	margin-right: 10px;
+}
+.col-4{
+	width: 860px;
+}
+.clearfix:after{
+    content: "";
+    clear: both;
+    display: block;
+    height: 0px;
+    visibility: hidden;
+}
+.clearfix{
+    *zoom:1;
+}
+.product-item{
+	float: left;
+	background-color: white;
+	height: 300px;
+}
+.product-item:hover{
+	box-shadow: 1px 1px 1px rgba(0,0,0,.1);
+}
+.product-item p{
+	font-size: 14px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space:nowrap; 
+	padding-left: 10px;
+}
+.product-item p{
+	font-size: 14px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space:nowrap; 
+	padding-left: 10px;
+}
+.product-price-number{
+	padding-top: 20px;
+	font-size: 14px;
+}
+.product-price{
+	color: red;
+	padding-right: 40px;
+	padding-left: 20px;
+}
+.product-number{
+	color: #8c8c8c;
+	padding-left: 30px;
+	font-size: 12px;
+}
+
+.loader{
+    position: relative;
+    width: 4px;
+    height: 20px;
+    background-color: #52c41a;
+    margin: 0 auto; 
+    animation: loading 0.3s linear 0s infinite alternate;
+}
+.loader:after,.loader:before{
+    position: absolute;
+    top:0;
+    left:0;
+    display: block;
+    content: '';
+    width: 4px;
+    height: 20px;
+    background-color:  #52c41a;
+}
+.loader:after{
+    margin-left: 10px;
+    transform: scale(1,0.5);
+    animation: loading 0.3s linear 0.3s infinite alternate;
+}
+.loader:before{
+    margin-left: -10px;
+    transform: scale(1,0.5);
+    animation: loading 0.3s linear 0.5s infinite alternate;
+}
+@keyframes loading{
+    from{
+        opacity: 0.5;
+        transform: scale(1,0.5);
+    }
+    to{
+        opacity: 1;
+        transform: scale(1,1);
+    }
+}
+.text-ellipsis{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.btn{
+    display: inline-block;  
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    background-color: #52c41a;
+    text-decoration: none;
+    text-align: center;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0 10px;
+}
+a.btn:hover{
+    color: #fff;
+    opacity: 0.8;
+}
