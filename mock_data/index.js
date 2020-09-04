@@ -67,5 +67,19 @@ if(USE_MOCK){
                 "icon": "@dataImage('200x200')"
             }
         ]
+    })
+    Mock.mock(/\/ads\/positionAds/, 'get', {
+        "code": 0,
+        "data|3-7": [
+            {
+                "position": "1",
+                "order": 0,
+                "isShow": "1",
+                "_id": "@string('lower',24)",
+                "name": "@word(4)",
+                "image": "@dataImage('862x440')",
+                "link": "http://mall.kuazhu.com/detail.html?productId=5ea68e9e5dbe7a0023712b03"
+            },
+        ]
     })      
 }

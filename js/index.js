@@ -14,12 +14,15 @@
             
 
             this.searchTimer = null
+            this.lastActiveIndex = 0
+            this.parentCategoriesItem = null
             this.categoriesTimer = null
             this.isSearchLayerEmpty = true
             
             this.handleCart()
             this.handleSerach()
             this.handleCategories()
+            this.handleCarousel()
         },
         loadCartCount:function(){
             var _this = this
@@ -85,18 +88,36 @@
             this.searchBtn.addEventListener('click',function(){
                 _this.submitSearch()
             },false)
+            //自动提示
             this.searchInput.addEventListener('input',function(){
                 if(_this.searchTimer){
                     clearTimeout(_this.searchTimer)
                 }
                 _this.searchTimer = setTimeout(function(){
                     _this.getSearchData()
-                },500)
+                },300)
+            },false)
+            //点击页面其他地方隐藏搜索提示层
+            d.addEventListener('click',function(){
+                utils.hide(_this.searchLayer)
             },false)
             //获取焦点显示搜索提示层
             this.searchInput.addEventListener('focus', function () {
                 if (!_this.isSearchLayerEmpty){
                     utils.show(_this.searchLayer)
+                }
+            },false)
+            //阻止输入框冒泡到document上
+            this.searchInput.addEventListener('click',function(ev){
+                ev.stopPropagation()
+            },false)
+            //事件委托处理层的提交
+            this.searchLayer.addEventListener('click',function(ev){
+                var elem = ev.target
+                if(elem.className =elem.innerText){
+                    var keyword = elem.innerText
+                    _this.searchInput.value = keyword
+                    _this.submitSearch()
                 }
             },false)
         },
@@ -154,32 +175,37 @@
             this.getParentCategoriesData()
 
             //利用事件代理触发
-            this.parentCategories.addEventListener('mouseover',function(ev){
-                
+            this.categories.addEventListener('mouseover',function(ev){
                     if(_this.categoriesTimer){
                         clearTimeout(_this.categoriesTimer)
                     }
                     _this.categoriesTimer = setTimeout(function(){
                         var elem = ev.target
-                        if(elem.className = 'parent-categories-item'){
+                        if(elem.className == 'parent-categories-item'){
                             utils.show(_this.childCategories)
+                            var pid = elem.getAttribute('data-id')
+                            var index = elem.getAttribute('data-index')
                             
-                            _this.getChildCategoriesData()
+                            _this.parentCategoriesItem[_this.lastActiveIndex].className = 'parent-categories-item'
+                            _this.parentCategoriesItem[index].className = 'parent-categories-item active'
+                            _this.lastActiveIndex = index
+                            _this.getChildCategoriesData(pid)
                         }
                      
                     },100)
               
             },false)
-            this.parentCategories.addEventListener('mouseleave',function(){
+            this.categories.addEventListener('mouseleave',function(){
                 if(_this.categoriesTimer){
                     clearTimeout(_this.categoriesTimer)
                 }
                 utils.hide(_this.childCategories)
-                
+                _this.childCategories.innerHTML = ''
+                _this.parentCategoriesItem[_this.lastActiveIndex].className = 'parent-categories-item'
             })
         },
         getParentCategoriesData:function(){
-            console.log(11)
+            
             var _this = this
             utils.ajax({
                 url:'/categories/arrayCategories',
@@ -216,7 +242,7 @@
                 html += '</ul>'
                 this.parentCategories.innerHTML = html
             }
-           this.parentCategoriesItem = d.querySelectorAll('parent-categories-item') 
+           this.parentCategoriesItem = d.querySelectorAll('.parent-categories-item') 
         },
         renderChildCategories:function(list){
             var len = list.length
@@ -230,11 +256,38 @@
                                 </a>
                             </li>`
                 }
+                html += '</ul>'
+                this.childCategories.innerHTML = html
             }         
-            html += '</ul>'
-            this.childCategories.innerHTML = html
-        }  
+        },
+        handleCarousel:function(){
+            var _this = this
+            utils.ajax({
+                url:'/ads/positionAds',
+                data:{
+                    position:1
+                },
+                success:function(data){
+                    if(data.code == 0){
+                        _this.renderCarousel(data.data)
+                    }
+                }
+            })
+        },
+        renderCarousel:function(list){
+            var imgs = list.map(function(item){
+                return item.image
+            })
+            new SlideCarousel({
+                id: 'swiper',
+                imgs: imgs,
+                width: 862,
+                height: 440,
+                playInterval: 2000
+            })
+        }
     }
+    
     
     page.init()    
 })(window,document);
