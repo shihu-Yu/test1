@@ -14,12 +14,12 @@
 .top .nav-list{
 	float: right;
 }
-.top .nav-list li{
+.top .nav-list .nav-item{
 	float:left;
 	margin-right: 10px;
 	line-height: 30px;
 }
-.top .nav-list li .icon-gouwuche{
+.top .nav-list .nav-item .icon-gouwuche{
 	font-size: 12px;
 }
 .top .nav-list .cart-box{
@@ -62,14 +62,15 @@
     margin-right: 10px;
 }
 .top .nav-list .cart-item  span{
-    display: inline-block;
+	display: inline-block;
     width: 170px;
 }
 .top .nav-list .cart-item .product-price{
-    float: right;
+	float: right;
     width: 60px;
     color: #f21;
-    margin-right: 10px;
+	margin-right: 10px;
+	margin-top:-30px;
 }
 .top .nav-list .cart-item .product-count{
     float: right;
@@ -117,6 +118,19 @@
 	width: 500px;
 	height: 60px;
 	box-sizing: border-box;
+	position: relative;
+}
+.header .search-wrap .search-box .search-layer{
+    display: none;
+    width: 414px;;
+    position: absolute;
+    top:42px;
+    left:0;
+    border: 1px solid #52c41a;
+    border-top: none;
+    box-sizing: border-box;
+    background: #fff;
+    z-index: 999;
 }
 .header .search-wrap .search-box .search-input{
 	width: 400px;
@@ -126,6 +140,7 @@
 	border:2px solid #52c41a;
 	text-indent: 10px;
 }
+
 .header .search-wrap .btn-search{
 	width: 96px;
 	line-height: 42px;
@@ -157,7 +172,7 @@
 	height: 440px;
 	box-sizing: border-box;
 }
-.parent-categories{
+.focus .container .parent-categories{
 	width: 208px;
 	height: 440px;
 	background-color: white;
@@ -166,11 +181,58 @@
 	margin-bottom: 10px;
 	float: left;
 }
+.focus .categories .parent-categories .parent-categories-item{
+    line-height: 40px;
+    padding-left: 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.focus .categories .parent-categories .parent-categories-item:hover{
+    background-color: #eee;
+    color:#1890ff;
+}
+.focus .categories .parent-categories .parent-categories-item.active{
+    background-color: #eee;
+    color:#1890ff;
+}
 .categories .parent-categories .keyword{
 	padding-top:20px;
 	margin-left: 10px;
 	margin-right: 10px;	
 	font-size: 14px;
+}
+.focus .categories .child-categories{
+	display: none;
+    position: absolute;
+    top:176px;
+    left:460px;
+    width: 872px;
+    height: 440px;
+    z-index: 2000;
+    background-color: #fff;
+    box-sizing: border-box;
+    padding: 10px 50px;
+    overflow: hidden;
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+}
+.focus .categories .child-item{
+    padding: 10px;
+    width: 80px;
+    float: left;
+    margin:0 10px 10px 0;
+}
+.focus .categories .child-item  img{
+    width: 100%;
+    height: 80px;
+}
+.focus .categories .child-item  p{
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    margin-top: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .swiper{
 	float: left;
