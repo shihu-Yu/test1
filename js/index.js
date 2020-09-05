@@ -330,7 +330,33 @@
         },
         renderFloor:function(list){
             var len = list.length
-            
+                var html = ''
+                for(var i =0;i<len;i++){
+                    html += `<div class="floor-swap1">
+                                <a href="#" class="hd">
+                                    <h2>F${list[i].num} ${list[i].title}</h2>
+                                </a>
+                            </div>
+                            <div class="floor-product ">
+                                <ul class="prouct-list clearfix">`
+                    for(var j = 0,len1= list[i].products.length;j<len1;j++){
+                        var product = list[i].products[j]
+                        html +=     `<li class="product-item col-1 col-gap">
+                                        <a href="#">
+                                            <img src="${product.mainImage}" width="180px" height="180px"> 
+                                                <p class="product-name">${product.name}</p>
+                                            <div class="product-price-number">
+                                                <span class="product-price">&yen;${product.price}</span>
+                                                <span class="product-number">${product.payNums}人已购买</span>
+                                            </div>
+                                        </a>
+                                    </li>`
+                    }
+                        html += `</ul>
+                            </div>`
+                }
+                this.floorContainer.innerHTML = html
+           
         }
     }
     

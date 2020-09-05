@@ -97,13 +97,13 @@ if(USE_MOCK){
             },
         ]
     })
-    Mock.mock('/floors','get',{
-        "code":0,
+    Mock.mock('/floors', 'get', {
+        "code": 0,
         "data|4": [
             {
-                "title": "@word(4)",
+                "title": "@cword(4)",
                 "id": "@string('lower',24)",
-                "products": [
+                "products|10": [
                     {
                         "status": "1",
                         "order": 0,
@@ -114,12 +114,12 @@ if(USE_MOCK){
                         "name": "@cword(3, 120)",
                         "mainImage": "@dataImage('200x200')",
                         "price|1-9999": 1,
-                        "stock|1-9999": 1
+                        "stock|1-9999": 1,
                     }
                 ],
                 "order": 0,
-                "num": 2
+                "num|+1": 1
             }
         ]
-    })     
+    })      
 }

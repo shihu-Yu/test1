@@ -345,6 +345,12 @@
 	margin-bottom: 10px;
 	padding-bottom: 5px;
  }
+ .floor .container  .product-item{
+	height: 300px;
+    background-color: #fff;
+    margin-bottom: 20px;
+ }
+
 .floor .floor-product .product-item:nth-child(5n+0){
 	margin-right: 0px;
 }
@@ -415,3 +421,33 @@
     color: #888;
 }
 /*底部*/
+/* 电梯 */
+.elevator{
+    position: fixed;
+    top:50%;
+    left:50%;
+    margin-left: -660px;
+}
+.elevator-item,.backToTop{
+    display: block;
+    width: 40px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    border-top: 1px solid #d9d9d9;
+}
+.elevator-item:hover .elevator-item-num,
+.backToTop:hover .elevator-item-num,
+.elevator-active .elevator-item-num{
+    display: none;
+}
+.elevator-item:hover .elevator-item-text,
+.backToTop:hover .elevator-item-text,
+.elevator-active .elevator-item-text{
+    display: block;
+    color: #52c41a;
+}
+.elevator-item-text{
+    display: none;
+}
+/* 电梯 */
