@@ -81,5 +81,45 @@ if(USE_MOCK){
                 "link": "http://mall.kuazhu.com/detail.html?productId=5ea68e9e5dbe7a0023712b03"
             },
         ]
-    })      
+    })
+    Mock.mock('/products/hot','get',{
+        "code":0,
+        "data|4": [
+            {
+                "order": 0,
+                "isShow": "1",
+                "isHot": "1",
+                "payNums|1-9999": 0,
+                "_id": "@string('lower',24)",
+                "name": "@cword(3, 120)",
+                "mainImage": "@dataImage('180x180')",
+                "price|1-9999": 1
+            },
+        ]
+    })
+    Mock.mock('/floors','get',{
+        "code":0,
+        "data|4": [
+            {
+                "title": "@word(4)",
+                "id": "@string('lower',24)",
+                "products": [
+                    {
+                        "status": "1",
+                        "order": 0,
+                        "isShow": "1",
+                        "isHot": "1",
+                        "payNums|1-9999": 0,
+                        "_id": "@string('lower',24)",
+                        "name": "@cword(3, 120)",
+                        "mainImage": "@dataImage('200x200')",
+                        "price|1-9999": 1,
+                        "stock|1-9999": 1
+                    }
+                ],
+                "order": 0,
+                "num": 2
+            }
+        ]
+    })     
 }

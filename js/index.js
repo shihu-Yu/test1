@@ -11,7 +11,8 @@
 
             this.parentCategories = d.querySelector('.parent-categories')
             this.childCategories = d.querySelector('.child-categories')
-            
+            this.hotProductList = d.querySelector('.hot .product-list')
+            this.floorContainer = d.querySelector('.floor .container')
 
             this.searchTimer = null
             this.lastActiveIndex = 0
@@ -23,6 +24,8 @@
             this.handleSerach()
             this.handleCategories()
             this.handleCarousel()
+            this.handlehotProductList()
+            this.handleFloor()
         },
         loadCartCount:function(){
             var _this = this
@@ -285,6 +288,49 @@
                 height: 440,
                 playInterval: 2000
             })
+        },
+        handlehotProductList:function(){
+            var _this = this
+            utils.ajax({
+                url:'/products/hot',
+                success:function(data){
+                    if(data.code == 0){
+                        _this.renderHotProductList(data.data)
+                    }
+                } 
+            })
+        },
+        renderHotProductList:function(list){
+            var len = list.length
+            if(len>0){
+                var html = ''
+                for(var i=0;i<len;i++){
+                    html += `<li class="product-item col-1 col-gap">
+                                <a href="#">
+                                    <img src="${list[i].mainImage}" width="210px" height="200px"> 
+                                        <p class="product-name">${list[i].name}</p>
+                                    <div class="product-price-number">
+                                        <span class="product-price">&yen;${list[i].price}</span>
+                                        <span class="product-number">${list[i].payNums}人已购买</span>
+                                    </div>
+                                </a>
+                            </li>`
+                }
+                this.hotProductList.innerHTML = html
+            }
+        },
+        handleFloor:function(){
+            var _this = this
+            utils.ajax({
+                url:'/floors',
+                success:function(data){
+                    _this.renderFloor(data.data)
+                }
+            })
+        },
+        renderFloor:function(list){
+            var len = list.length
+            
         }
     }
     

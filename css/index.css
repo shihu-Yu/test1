@@ -217,7 +217,7 @@
     position: absolute;
     top:176px;
     left:428px;
-    width: 872px;
+    width:904px;
     height: 440px;
     z-index: 2000;
     background-color: #fff;
@@ -319,6 +319,10 @@
 	width: 860px;
 	float: left;
 	margin-top: 20px;
+}
+
+.hot .product .product-number{
+	padding-left: 10px;
 }
 .hot .product-item:last-child{
 	margin-right: -2px;
