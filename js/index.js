@@ -307,7 +307,7 @@
                 for(var i=0;i<len;i++){
                     html += `<li class="product-item col-1 col-gap">
                                 <a href="#">
-                                    <img src="${list[i].mainImage}" width="210px" height="200px"> 
+                                    <img src="${list[i].mainImage}" width="180px" height="180px"> 
                                         <p class="product-name">${list[i].name}</p>
                                     <div class="product-price-number">
                                         <span class="product-price">&yen;${list[i].price}</span>
