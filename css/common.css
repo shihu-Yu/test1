@@ -55,6 +55,9 @@ a:hover{
 	white-space:nowrap; 
 	padding-left: 10px;
 }
+.product-item img{
+    padding: 14px;
+}
 .product-price-number{
 	padding-top: 20px;
 	font-size: 14px;

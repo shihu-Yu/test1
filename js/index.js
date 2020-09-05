@@ -356,8 +356,7 @@
                             </div>`
                 }
                 this.floorContainer.innerHTML = html
-           
-        }
+        },
     }
     
     
