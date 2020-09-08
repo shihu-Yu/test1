@@ -13,11 +13,17 @@
             this.childCategories = d.querySelector('.child-categories')
             this.hotProductList = d.querySelector('.hot .product-list')
             this.floorContainer = d.querySelector('.floor .container')
-
+            this.elevator = d.querySelector('#elevator')
+            
             this.searchTimer = null
             this.lastActiveIndex = 0
             this.parentCategoriesItem = null
             this.categoriesTimer = null
+
+            this.elevatorTimer = null
+            this.elevatorItems = null
+            this.floors = null
+            
             this.isSearchLayerEmpty = true
             
             this.handleCart()
@@ -26,6 +32,7 @@
             this.handleCarousel()
             this.handlehotProductList()
             this.handleFloor()
+            this.handleElevator()
         },
         loadCartCount:function(){
             var _this = this
@@ -331,6 +338,7 @@
         renderFloor:function(list){
             var len = list.length
                 var html = ''
+                var elevatorHtml = ''
                 for(var i =0;i<len;i++){
                     html += `<div class="floor-swap1">
                                 <a href="#" class="hd">
@@ -354,9 +362,94 @@
                     }
                         html += `</ul>
                             </div>`
+                        elevatorHtml +=`<a href="javascript:;" class="elevator-item">
+                                            <span class="elevator-item-num">F${list[i].num}</span>
+                                            <span class="elevator-item-text text-ellipsis" data-num="${i}">${list[i].title}</span>
+                                        </a>`
                 }
+                elevatorHtml += `<a href="javascript:;" class="backToTop" >
+                                     <span class="elevator-item-num"><i class="iconfont icon-arrow-up"></i></span>
+                                     <span class="elevator-item-text text-ellipsis" id="backToTop">顶部</span>
+                                 </a>`
                 this.floorContainer.innerHTML = html
+                this.elevator.innerHTML = elevatorHtml
+                this.floors = d.querySelectorAll('.floor-swap1')
+                console.log(this.floors)
+                this.elevatorItems = d.querySelectorAll('.elevator-item')
+                
         },
+        handleElevator:function(){
+            var _this = this 
+            //点击楼层返回到楼层显示区域
+            this.elevator.addEventListener('click',function(ev){
+                var elem = ev.target
+                if(elem.id == 'backToTop'){
+                    d.documentElement.scrollTop = 0
+                }else if(elem.className == 'elevator-item-text text-ellipsis'){
+                    var num = elem.getAttribute('data-num')
+                    if(!_this.floors){
+                        teturn
+                    }
+                    var floor = _this.floors[num]
+                    d.documentElement.scrollTop = floor.offsetTop
+                }
+            },false)
+             //楼层进入可视区设置电梯状态
+             var betterSetElevator = function(){
+                 
+                 if(_this.elevatorTimer){
+                     clearTimeout(_this.elevatorTimer)
+                 }
+                 _this.elevatorTimer = setTimeout(function(){
+                    
+                     _this.setElevator()     
+                },200)
+             }
+             w.addEventListener('scroll',betterSetElevator,false)
+             
+             w.addEventListener('resize',betterSetElevator,false)
+             
+             w.addEventListener('load',betterSetElevator,false)
+        },
+        setElevator:function(){
+            if (!this.elevatorItems){
+                return
+            }
+            
+            var num = this.getFloorNum()
+            
+            if(num == -1){
+                utils.hide(this.elevator)
+            }else{
+                utils.show(this.elevator)
+                for(var i = 0,len = this.elevatorItems.length;i<len;i++){
+                    if (num == i) {
+                        this.elevatorItems[i].className = 'elevator-item elevator-active'
+                    } else {
+                        this.elevatorItems[i].className = 'elevator-item'
+                    }
+                }
+            }
+
+        },
+        getFloorNum:function(){
+            
+            var num = -1
+           
+            if(!this.floors){
+                return num
+            }
+            for(var i=0,len = this.floors.length;i<len;i++){
+                var floor = this.floors[i]
+                
+                num = i
+                if(floor.offsetTop > d.documentElement.scrollTop + d.documentElement.clientHeight / 2){
+                    num = i - 1
+                    break
+                }
+            }
+            return num
+        }
     }
     
     
